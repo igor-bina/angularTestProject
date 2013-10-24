@@ -1,8 +1,9 @@
 ﻿<!DOCTYPE html>
-<html ng-app="AngAppFirst">
+<html ng-app="AngAppTest">
 <head>
     <title>Angular test application</title>
     <link rel="stylesheet" href="styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/style.css" />
     <script src="scripts/libs/jQuery/uncompressed/jquery_1_10_2.js"></script>
     <script src="scripts/libs/angular/angular.js"></script>
     <script src="scripts/libs/angular/angular-resource.js"></script>
@@ -12,13 +13,13 @@
     <script src="scripts/custom/filters/filters.js"></script>
 </head>
 <body>
-    <div ng-controller="MenuCtrl" style="width: 300px; float: left;">
+    <div ng-controller="MenuCtrl" class="menu-view">
         <ul class="nav nav-pills nav-stacked">
             <li ng-repeat="item in menuItems" data-item-id="{{item.id}}" class="{{item.active}}">
                 <a ng-click="event.menuClick(this)" data-item-id="{{item.id}}" href="{{item.link}}">{{item.text}}</a>
             </li>
         </ul>
     </div>
-    <div ng-view style="float: left;"></div>
+    <div ng-view class="other-view"></div>
 </body>
 </html>

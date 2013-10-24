@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('AngAppFirst.Filters', [])
+angular.module('AngAppTest.Filters', [])
     .filter('list', function() {
         return function (list, value) {
             if (!value) {

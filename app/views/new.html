@@ -1,1 +1,7 @@
-﻿<div>new</div>
+﻿<div ng-controller="NewCtrl">
+    <input type="text" ng-model="newItem.id"/><br/>
+    <input type="text" ng-model="newItem.name"/><br/>
+    <input type="text" ng-model="newItem.surname"/><br/>
+    <input type="text" ng-model="newItem.desc"/><br/>
+    <a href="#/list" ng-click="save()">save</a>
+</div>
