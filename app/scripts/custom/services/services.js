@@ -1,6 +1,8 @@
-﻿'use strict';
+﻿(function () {
+    'use strict';
 
-angular.module('AngAppTest.Services', ['ngResource'])
-	.factory('dataForList', function () {
-	    return publicData.items;
-	});
+    angular.module('AngAppTest.Services', ['ngResource'])
+        .factory('dataForList', function () {
+            return publicData.items;
+        });
+})();
