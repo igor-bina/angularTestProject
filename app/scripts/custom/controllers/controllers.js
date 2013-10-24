@@ -1,5 +1,5 @@
 ﻿
-MenuCtrl = function($scope) {
+app.controller('MenuCtrl', function ($scope) {
     $scope.container = $('[ng-controller="Controllers.MenuCtrl"]');
     $scope.name1 = "name11111";
     $scope.menuItems = [
@@ -7,49 +7,49 @@ MenuCtrl = function($scope) {
         { id: "new", text: "new item", link: "#/new" },
         { id: "main", text: "main info", link: "#/main" }
     ];
-    
+
     var selectedMenu = 0;
-    
+
     $scope.event = {
-        menuClick: function(data) {
+        menuClick: function (data) {
             $scope.menuItems[selectedMenu].active = "";
             selectedMenu = $scope.menuItems.indexOf(data.item);
             $scope.menuItems[selectedMenu].active = "active";
         }
     };
-};
+});
 
-ListCtrl = function($scope, dataForList) {
+app.controller('ListCtrl', function ($scope, dataForList) {
     $scope.menuItems = dataForList;
-};
+});
 
-NewCtrl = function($scope) {
+app.controller('NewCtrl', function ($scope) {
     $scope.newItem = { id: "", name: "", surName: "", desc: "" };
-    $scope.save = function() {
+    $scope.save = function () {
         publicData.items.push($scope.newItem);
     };
-};
+});
 
-EditCtrl = function($scope, $routeParams, $location, dataForList) {
-    var editItemId = dataForList.map(function(item) {
+app.controller('EditCtrl', function ($scope, $routeParams, $location, dataForList) {
+    var editItemId = dataForList.map(function (item) {
         return item.id;
     }).indexOf(+$routeParams.id);
     $scope.editItem = dataForList[editItemId];
-    $scope.save = function() {
+    $scope.save = function () {
         publicData.items[editItemId].id = $scope.editItem.id;
         publicData.items[editItemId].name = $scope.editItem.name;
         publicData.items[editItemId].surname = $scope.editItem.surname;
         publicData.items[editItemId].desc = $scope.editItem.desc;
     };
-};
+});
 
-AddCtrl = function($scope) {
+app.controller('AddCtrl', function ($scope) {
     $scope.newItem = { id: "", name: "", surName: "", desc: "" };
-    $scope.save = function() {
+    $scope.save = function () {
         publicData.items.push($scope.newItem);
     };
-};
+});
 
-MainCtrl = function($scope) {
+app.controller('MainCtrl', function ($scope) {
     $scope.name = "hello";
-};
+});
