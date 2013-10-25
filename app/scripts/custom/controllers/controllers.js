@@ -23,14 +23,35 @@
 
     app.controller('ListCtrl', ['$scope', 'fnGetData', function ($scope, fnGetData) {
         $scope.menuItems = fnGetData();
+        $scope.visibleTable = $scope.menuItems.length == 0;
+
+        $scope.delete = function (id) {
+            var editItemId = $scope.menuItems.map(function (item) {
+                return item.id;
+            }).indexOf(id);
+
+            if (localStorage) {
+                var publicData = JSON.parse(localStorage.getItem('publicData') || '[]');
+                publicData.splice(editItemId, 1);
+                localStorage.setItem('publicData', JSON.stringify(publicData));
+            }
+
+            $scope.menuItems.splice(editItemId, 1);
+        };
     }]);
 
     app.controller('NewCtrl', ['$scope', function ($scope) {
         $scope.newItem = {
             id: "",
-            name: "",
-            surName: "",
+            carName: "",
+            amount: "",
             desc: ""
+        };
+        $scope.validate = {
+            id: { types: 'required number', message: 'incorrect id' },
+            carName: { types: 'required', message: 'incorrect car name' },
+            amount: { types: 'required number', message: 'incorrect amount' },
+            desc: { types: 'required', message: 'incorrect desc' }
         };
         $scope.save = function () {
             if (localStorage) {
@@ -39,20 +60,21 @@
                 localStorage.setItem('publicData', JSON.stringify(publicData));
             }
         };
+        $scope.isValid = true;
     }]);
 
     app.controller('EditCtrl', ['$scope', '$routeParams', '$location', 'fnGetData', function ($scope, $routeParams, $location, fnGetData) {
         var dataForList = fnGetData();
         var editItemId = dataForList.map(function (item) {
             return item.id;
-        }).indexOf(+$routeParams.id);
+        }).indexOf($routeParams.id);
         $scope.editItem = dataForList[editItemId];
         $scope.save = function () {
             if (localStorage) {
                 var publicData = JSON.parse(localStorage.getItem('publicData') || '[]');
                 publicData[editItemId].id = $scope.editItem.id;
-                publicData[editItemId].name = $scope.editItem.name;
-                publicData[editItemId].surname = $scope.editItem.surname;
+                publicData[editItemId].carName = $scope.editItem.carName;
+                publicData[editItemId].amount = $scope.editItem.amount;
                 publicData[editItemId].desc = $scope.editItem.desc;
                 localStorage.setItem('publicData', JSON.stringify(publicData));
             }
@@ -62,8 +84,8 @@
     app.controller('AddCtrl', ['$scope', function ($scope) {
         $scope.newItem = {
             id: "",
-            name: "",
-            surName: "",
+            carName: "",
+            amount: "",
             desc: ""
         };
         $scope.save = function () {
@@ -76,6 +98,5 @@
     }]);
 
     app.controller('MainCtrl', ['$scope', function ($scope) {
-        $scope.name = "hello";
     }]);
 })();

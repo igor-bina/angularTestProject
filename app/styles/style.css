@@ -1,9 +1,7 @@
 ﻿.menu-view {
-    width: 300px; 
-    float: left;
     margin: 10px 10px 10px 10px;
 }
 .other-view {
-    float: left;
     margin: 10px 10px 10px 10px;
+    width: 700px;
 }
