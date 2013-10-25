@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="item in menuItems | list:search">
+            <tr ng-repeat="item in menuItems | filter:search">
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
                 <td>{{item.surname}}</td>
