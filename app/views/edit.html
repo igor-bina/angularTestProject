@@ -1,7 +1,7 @@
-﻿<div ng-controller="EditCtrl">
-    <input type="text" ng-model="editItem.id"/><br/>
-    <input type="text" ng-model="editItem.name"/><br/>
-    <input type="text" ng-model="editItem.surname"/><br/>
-    <input type="text" ng-model="editItem.desc"/><br/>
-    <a href="#/list" ng-click="save()">save</a>
+﻿﻿<div ng-controller="EditCtrl" class="text-right">
+    <input type="text" class="form-control input-sm" placeholder="car id" ng-model="editItem.id"/><br/>
+    <input type="text" class="form-control input-sm" placeholder="car name" ng-model="editItem.carName"/><br/>
+    <input type="text" class="form-control input-sm" placeholder="amount" ng-model="editItem.amount"/><br/>
+    <input type="text" class="form-control input-sm" placeholder="description" ng-model="editItem.desc"/><br/>
+    <a href="#/list" class="btn btn-primary btn-xs" ng-click="save()">save</a>
 </div>
