@@ -33,6 +33,8 @@
                 var publicData = JSON.parse(localStorage.getItem('publicData') || '[]');
                 publicData.splice(editItemId, 1);
                 localStorage.setItem('publicData', JSON.stringify(publicData));
+
+                $scope.visibleTable = publicData.length == 0;
             }
 
             $scope.menuItems.splice(editItemId, 1);
