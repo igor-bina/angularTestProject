@@ -2,6 +2,8 @@
     'use strict';
 
     app.controller('MenuCtrl', function ($scope) {
+//        angular.extend($scope, Models.MenuCtrl);
+        
         $scope.container = $('[ng-controller="Controllers.MenuCtrl"]');
         $scope.name1 = "name11111";
         $scope.menuItems = [

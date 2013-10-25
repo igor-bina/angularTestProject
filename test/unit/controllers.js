@@ -1,16 +1,17 @@
 ﻿'use strict';
 
 describe('MenuCtrl', function () {
-    beforeEach(function () {
-        var controller;
-        
-        inject(function ($rootScope, $controller) {
-            controller = $controller;
-        });
-    });
+    var ctrl, scope;
 
-    it('test MenuCtrl', function () {
-        controller('MenuCtrl', { $scope: {} });
+    //beforeEach(module('AngAppTest'));
+
+    beforeEach(angular.mock.inject(function ($rootScope, $controller) {
+        scope = $rootScope.$new();
+        ctrl = $controller('MenuCtrl', { $scope: scope });
+    }));
+
+    it("has repeats attribute set to 5", function () {
+        expect(scope.repeats).toBe(5);
     });
 });
 
