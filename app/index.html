@@ -5,10 +5,14 @@
     <link rel="stylesheet" href="styles/bootstrap.min.css" />
     <link rel="stylesheet" href="styles/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="styles/style.css" />
-    
+    <!--LESS file before JS-->
+    <link rel="stylesheet/less" href="styles/less/style.less"/>
+
     <script src="scripts/libs/jQuery/uncompressed/jquery_1_10_2.js"></script>
     <script src="scripts/libs/angular/angular.js"></script>
     <script src="scripts/libs/angular/angular-resource.js"></script>
+    <script src="scripts/libs/less/less1.5.0.js"></script>
+
     <script src="scripts/custom/app.js"></script>
     <script src="scripts/custom/models/models.js"></script>
     <script src="scripts/custom/controllers/controllers.js"></script>
@@ -16,11 +20,11 @@
     <script src="scripts/custom/filters/filters.js"></script>
     <script src="scripts/custom/directives/directives.js"></script>
 </head>
-<body>
-    <div ng-controller="MenuCtrl" class="menu-view">
+<body ng-controller="CommonCtrl">
+    <div class="menu-view">
         <ul class="nav nav-tabs">
-            <li ng-repeat="item in menuItems" data-item-id="{{item.id}}" class="{{item.active}}">
-                <a ng-click="event.menuClick(this)" data-item-id="{{item.id}}" href="{{item.link}}">{{item.text}}</a>
+            <li ng-repeat="item in menu.menuItems" data-item-id="{{item.id}}" class="{{item.active}}">
+                <a ng-click="menu.event.menuClick(this)" data-item-id="{{item.id}}" href="{{item.link}}">{{item.text}}</a>
             </li>
         </ul>
     </div>

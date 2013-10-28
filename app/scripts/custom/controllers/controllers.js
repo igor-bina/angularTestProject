@@ -1,26 +1,38 @@
 ﻿(function () {
     'use strict';
 
-    app.controller('MenuCtrl', ['$scope', function ($scope) {
-        $scope.name1 = "name11111";
-        $scope.menuItems = [
-            { id: "list", text: "list items", link: "#/list", active: "active" },
-            { id: "new", text: "new item", link: "#/new" },
-            { id: "main", text: "main info", link: "#/main" }
-        ];
+    app.controller('CommonCtrl', ['$scope', function ($scope) {
+        $scope.menu = {
+            selectedMenu: 0,
+            menuItems: [
+             { id: "list", text: "list items", link: "#/list", active: "active" },
+             { id: "new", text: "new item", link: "#/new" },
+             { id: "main", text: "main info", link: "#/main" }
+            ],
+            setMenu: function (type) {
+                this.menuItems.filter(function (item) {
+                    return item.active == 'active';
+                })[0].active = '';
 
-        var selectedMenu = 0;
-
-        $scope.event = {
-            menuClick: function (data) {
-                $scope.menuItems[selectedMenu].active = "";
-                selectedMenu = $scope.menuItems.indexOf(data.item);
-                $scope.menuItems[selectedMenu].active = "active";
+                var selectedMenu = this.menuItems.filter(function (item) {
+                    return item.id == type;
+                })[0];
+                
+                this.selectedMenu = this.menuItems.indexOf(selectedMenu);
+                selectedMenu.active = 'active';
+            },
+            event: {
+                menuClick: function (data) {
+                    var self = $scope.menu;
+                    self.menuItems[self.selectedMenu].active = "";
+                    self.selectedMenu = self.menuItems.indexOf(data.item);
+                    self.menuItems[self.selectedMenu].active = "active";
+                }
             }
         };
     }]);
 
-    app.controller('ListCtrl', ['$scope', 'fnGetData', function ($scope, fnGetData) {
+    app.controller('ListCtrl', ['$scope', 'fnGetData', 'listService', function ($scope, fnGetData, listService) {
         $scope.menuItems = fnGetData();
         $scope.visibleTable = $scope.menuItems.length == 0;
 
@@ -42,6 +54,8 @@
     }]);
 
     app.controller('NewCtrl', ['$scope', function ($scope) {
+        $scope.$parent.menu.setMenu('new');
+
         $scope.newItem = {
             id: "",
             carName: "",
@@ -82,22 +96,28 @@
         };
     }]);
 
-    app.controller('AddCtrl', ['$scope', function ($scope) {
+    app.controller('AddCtrl', ['$scope', 'listService', function ($scope, listService) {
         $scope.newItem = {
-            id: "",
-            carName: "",
-            amount: "",
-            desc: ""
+            id: "123",
+            carName: "wer",
+            amount: "32",
+            desc: "werer"
         };
-        $scope.save = function () {
+        $scope.save = function() {
             if (localStorage) {
                 var publicData = JSON.parse(localStorage.getItem('publicData') || '[]');
                 publicData.push($scope.newItem);
                 localStorage.setItem('publicData', JSON.stringify(publicData));
             }
         };
+
+        listService.getItem(function (data) {
+            var testData = data.items;
+        });
+        listService.addItem($scope.newItem);
     }]);
 
     app.controller('MainCtrl', ['$scope', function ($scope) {
+        $scope.$parent.menu.setMenu('main');
     }]);
 })();

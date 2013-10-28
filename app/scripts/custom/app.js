@@ -1,9 +1,9 @@
-﻿﻿var app = null;
+﻿var app = null;
 
 (function () {
     'use strict';
 
-    app = angular.module('AngAppTest', ['AngAppTest.Services', 'AngAppTest.Filters'])
+    app = angular.module('AngAppTest', ['ngResource', 'AngAppTest.Filters'])
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider
                     .when('/list', { template: 'views/list.html', controller: "ListCtrl" })

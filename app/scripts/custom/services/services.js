@@ -1,17 +1,22 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('AngAppTest.Services', ['ngResource'], function ($provide) {
-        $provide.factory('fnGetData', function () {
-            return function () {
-                var publicData = [];
-                
-                if (localStorage) {
-                    publicData = JSON.parse(localStorage.getItem('publicData') || '[]');
-                }
+    app.factory('listService', ['$resource', function ($resource) {
+        var service = $resource('testData/dataForList.html/:id',
+                  { /*  id: "@id"  */ }, //parameters default
+                  {
+                      getItem: { method: "GET" },
+                      addItem: { method: "POST" },
+                      updateItem: { method: "POST" },
+                      deleteItem: { method: "POST" },
+                  });
 
-                return publicData;
-            };
-        });
+        return service;
+    }]);
+
+    app.factory('fnGetData', function () {
+        return function () {
+            return localStorage && JSON.parse(localStorage.getItem('publicData') || '[]');;
+        };
     });
 })();
